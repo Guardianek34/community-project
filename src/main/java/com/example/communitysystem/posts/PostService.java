@@ -1,2 +1,4 @@
-package com.example.communitysystem.posts;public class PostService {
+package com.example.communitysystem.posts;
+
+public class PostService {
 }

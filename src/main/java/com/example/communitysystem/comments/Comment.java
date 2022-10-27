@@ -1,20 +1,29 @@
-package com.example.communitysystem.model;
+package com.example.communitysystem.comments;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Version;
+import com.example.communitysystem.posts.Post;
+import lombok.*;
+
+import javax.persistence.*;
+import java.time.ZonedDateTime;
 
 @Entity
+@Builder
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Comment {
 
-    @GeneratedValue
     @Id
+    @GeneratedValue
     private Long id;
 
-    private Long postID;
+    @ManyToOne
+    private Post post;
 
-    private String author;
+    private Long authorId;
+
+    private ZonedDateTime timeStamp;
 
     private String content;
 

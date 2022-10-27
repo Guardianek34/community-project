@@ -1,2 +1,4 @@
-package com.example.communitysystem.comments;public class CommentService {
+package com.example.communitysystem.comments;
+
+public class CommentService {
 }
