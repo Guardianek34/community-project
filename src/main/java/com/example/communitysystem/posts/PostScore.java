@@ -1,5 +1,7 @@
 package com.example.communitysystem.posts;
 
+import com.example.communitysystem.comments.Comment;
+import com.example.communitysystem.user.UserProfile;
 import lombok.*;
 
 import javax.persistence.*;
@@ -15,33 +17,18 @@ public class PostScore {
     private static final Integer ZERO = 0;
     private static final Integer HIDDEN_THRESHOLD_VALUE = -100;
 
-    @GeneratedValue
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @ManyToOne
     private Post post;
+
+    @ManyToOne
+    private UserProfile user;
 
     private Integer scoreValue = ZERO;
 
-    // most likely use SQL queries instead of version
-    @Version
-    private Long version;
-
-    // field used to hide posts when the post's score gets too low
-    // (although clients can access them by clicking on them)
-    private Boolean isHiddenByDefault;
-
-    public void incrementScore() {
-        scoreValue++;
-    }
-
-    public void decrementScore() {
-        scoreValue--;
-    }
-
-    public boolean shouldBeHidden() {
-        return this.scoreValue <= HIDDEN_THRESHOLD_VALUE;
-    }
-
+    public void likePost() { this.scoreValue = 1;}
+    public void dislikePost() { this.scoreValue = -1;}
 }

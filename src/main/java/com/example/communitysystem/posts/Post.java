@@ -2,6 +2,7 @@ package com.example.communitysystem.posts;
 
 import com.example.communitysystem.comments.Comment;
 import com.example.communitysystem.community.Community;
+import com.example.communitysystem.user.UserProfile;
 import lombok.*;
 import org.hibernate.annotations.OptimisticLock;
 
@@ -18,10 +19,8 @@ import java.util.List;
 public class Post {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private Long authorId;
 
     private String title;
     private String content;
@@ -31,6 +30,9 @@ public class Post {
     @Lob
     private byte[] image;
 
+    @OneToOne
+    private UserProfile author;
+
     @OneToMany(mappedBy = "post", cascade = CascadeType.PERSIST)
     @OptimisticLock(excluded = true)
     private List<Comment> comments;
@@ -38,8 +40,8 @@ public class Post {
     @ManyToOne
     private Community community;
 
-    @OneToOne(mappedBy = "post")
-    private PostScore postScore;
+    @OneToMany(mappedBy = "post")
+    private List<PostScore> postScore;
 
     @Version
     private Long version;
