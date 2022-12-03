@@ -4,7 +4,7 @@ import com.example.communitysystem.user.UserProfile;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Builder
@@ -19,8 +19,9 @@ public class UserAuth {
 
     private String username;
     private String password;
+    private String email;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     private UserProfile profile;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -29,5 +30,5 @@ public class UserAuth {
             joinColumns = @JoinColumn(name = "user_auth_id"),
             inverseJoinColumns = @JoinColumn(name = "user_role_id")
     )
-    private List<UserRole> roles;
+    private Set<UserRole> roles;
 }

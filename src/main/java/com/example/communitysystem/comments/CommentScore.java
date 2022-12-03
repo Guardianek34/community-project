@@ -20,8 +20,8 @@ public class CommentScore {
     @ManyToOne
     private UserProfile user;
 
-    private Integer value = ZERO;
+    private Integer totalValue = ZERO;
 
-    public void likeComment() { this.value = 1;}
-    public void dislikeComment() { this.value = -1;}
+    public void likeComment() { this.totalValue = 1;}
+    public void dislikeComment() { this.totalValue = -1;}
 }

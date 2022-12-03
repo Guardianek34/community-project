@@ -2,12 +2,10 @@ package com.example.communitysystem.shared;
 
 import lombok.Builder;
 
-import java.util.Date;
+import java.time.Instant;
 
 public record ErrorResponse(
-        int statusCode,
-        Date timestamp,
-        String message,
-        String description) {
+        Instant timestamp,
+        String message) {
     @Builder public ErrorResponse {}
 }

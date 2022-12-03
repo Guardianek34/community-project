@@ -1,7 +1,7 @@
 package com.example.communitysystem.community.exception;
 
-public class NameNotUniqueException extends RuntimeException {
-    public NameNotUniqueException() {
+public class CommunityNameNotUniqueException extends RuntimeException {
+    public CommunityNameNotUniqueException() {
         super("Provided community's name is not unique.");
     }
 }

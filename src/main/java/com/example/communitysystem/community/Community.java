@@ -38,4 +38,10 @@ public class Community {
     @Version
     private Long version;
 
+    public String getCreatorName() {
+        return this.creator.getName();
+    }
+
+
+
 }
