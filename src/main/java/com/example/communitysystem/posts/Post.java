@@ -1,8 +1,8 @@
 package com.example.communitysystem.posts;
 
+import com.example.communitysystem.auth.UserAuth;
 import com.example.communitysystem.comments.Comment;
 import com.example.communitysystem.community.Community;
-import com.example.communitysystem.user.UserProfile;
 import lombok.*;
 import org.hibernate.annotations.OptimisticLock;
 
@@ -31,7 +31,7 @@ public class Post {
     private byte[] image;
 
     @OneToOne
-    private UserProfile author;
+    private UserAuth author;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.PERSIST)
     @OptimisticLock(excluded = true)

@@ -1,7 +1,7 @@
 package com.example.communitysystem.community;
 
+import com.example.communitysystem.auth.UserAuth;
 import com.example.communitysystem.community.exception.CommunityNameNotUniqueException;
-import com.example.communitysystem.user.UserProfile;
 import com.example.communitysystem.user.UserRepository;
 import com.example.communitysystem.user.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +25,7 @@ public class CommunityService {
             throw new CommunityNameNotUniqueException();
         }
 
-        UserProfile user = this.userRepository.findByName(username)
+        UserAuth user = this.userRepository.findByUsername(username)
                 .orElseThrow(UserNotFoundException::new);
 
         return this.communityRepository.save(mapToCommunity(communityName, user));

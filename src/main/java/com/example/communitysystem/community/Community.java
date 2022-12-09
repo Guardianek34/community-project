@@ -1,7 +1,7 @@
 package com.example.communitysystem.community;
 
+import com.example.communitysystem.auth.UserAuth;
 import com.example.communitysystem.posts.Post;
-import com.example.communitysystem.user.UserProfile;
 import lombok.*;
 
 import javax.persistence.*;
@@ -27,10 +27,10 @@ public class Community {
     private List<Rule> rules;
 
     @ManyToOne
-    private UserProfile creator;
+    private UserAuth creator;
 
     @ManyToMany(mappedBy = "subscribedCommunities")
-    private Set<UserProfile> subscribers;
+    private Set<UserAuth> subscribers;
 
     @OneToMany(mappedBy = "community")
     private List<Post> posts;
@@ -39,7 +39,7 @@ public class Community {
     private Long version;
 
     public String getCreatorName() {
-        return this.creator.getName();
+        return this.creator.getUsername();
     }
 
 

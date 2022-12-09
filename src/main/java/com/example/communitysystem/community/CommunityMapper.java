@@ -1,13 +1,13 @@
 package com.example.communitysystem.community;
 
+import com.example.communitysystem.auth.UserAuth;
 import com.example.communitysystem.community.dto.CommunitySummary;
-import com.example.communitysystem.user.UserProfile;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 class CommunityMapper {
-    public static Community mapToCommunity(String communityName, UserProfile user) {
+    public static Community mapToCommunity(String communityName, UserAuth user) {
         return Community.builder()
                 .name(communityName)
                 .creator(user)

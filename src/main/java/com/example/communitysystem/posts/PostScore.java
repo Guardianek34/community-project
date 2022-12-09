@@ -1,7 +1,6 @@
 package com.example.communitysystem.posts;
 
-import com.example.communitysystem.comments.Comment;
-import com.example.communitysystem.user.UserProfile;
+import com.example.communitysystem.auth.UserAuth;
 import lombok.*;
 
 import javax.persistence.*;
@@ -25,7 +24,7 @@ public class PostScore {
     private Post post;
 
     @ManyToOne
-    private UserProfile user;
+    private UserAuth user;
 
     private Integer scoreValue = ZERO;
 

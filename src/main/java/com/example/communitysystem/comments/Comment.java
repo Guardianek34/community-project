@@ -1,7 +1,7 @@
 package com.example.communitysystem.comments;
 
+import com.example.communitysystem.auth.UserAuth;
 import com.example.communitysystem.posts.Post;
-import com.example.communitysystem.user.UserProfile;
 import lombok.*;
 
 import javax.persistence.*;
@@ -28,7 +28,7 @@ public class Comment {
     private Post post;
 
     @OneToOne
-    private UserProfile author;
+    private UserAuth author;
 
     @OneToMany(mappedBy = "comment")
     private List<CommentScore> scores;

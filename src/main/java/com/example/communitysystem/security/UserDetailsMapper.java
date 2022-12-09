@@ -11,7 +11,7 @@ public class UserDetailsMapper {
 
     public static UserDetailsSecurity mapFrom(UserAuth user) {
         List<GrantedAuthority> authorities = user.getRoles().stream()
-                .map(role -> new SimpleGrantedAuthority(role.getRoleType().name()))
+                .map(role -> new SimpleGrantedAuthority(role.getRoleType().name() + role.getCommunity().getId()))
                 .collect(Collectors.toList());
 
         return UserDetailsSecurity.builder()
@@ -21,5 +21,11 @@ public class UserDetailsMapper {
                 .password(user.getPassword())
                 .authorities(authorities)
                 .build();
+    }
+
+    public static List<String> mapToRoles(UserDetailsSecurity userDetails) {
+        return userDetails.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.toList());
     }
 }

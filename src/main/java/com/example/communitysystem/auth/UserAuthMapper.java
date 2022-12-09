@@ -1,15 +1,13 @@
 package com.example.communitysystem.auth;
 
-import com.example.communitysystem.auth.dto.LoginRequest;
 import com.example.communitysystem.auth.dto.SignupRequest;
 import com.example.communitysystem.auth.dto.UserInfoResponse;
+import com.example.communitysystem.security.UserDetailsMapper;
 import com.example.communitysystem.security.UserDetailsSecurity;
-import com.example.communitysystem.user.UserProfile;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 
 @Component
 @RequiredArgsConstructor
@@ -21,10 +19,7 @@ public class UserAuthMapper {
         return UserAuth.builder()
                 .username(credentials.username())
                 .password(encoder.encode(credentials.password()))
-                .profile(UserProfile.builder()
-                        .name(credentials.username())
-                        .email(credentials.email())
-                        .build())
+                .email(credentials.email())
                 .build();
     }
 
@@ -33,6 +28,7 @@ public class UserAuthMapper {
                 .id(userDetails.getId())
                 .username(userDetails.getUsername())
                 .email(userDetails.getEmail())
+                .roles(UserDetailsMapper.mapToRoles(userDetails))
                 .build();
     }
 }

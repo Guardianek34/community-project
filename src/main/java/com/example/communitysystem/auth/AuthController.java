@@ -11,8 +11,9 @@ import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/api")
 @RequiredArgsConstructor
 public class AuthController {
 
@@ -21,24 +22,25 @@ public class AuthController {
     private final UserAuthMapper mapper;
 
 
-    @PostMapping("/signin")
+    @PostMapping("/auth/signin")
     public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {
         UserDetailsSecurity userData = this.userService.authenticateUser(loginRequest);
         ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(userData);
+
         return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
                 .body(mapper.toResponse(userData));
     }
 
-    @PostMapping("/register")
+    @PostMapping("/auth/signup")
     public ResponseEntity<?> registerUser(@RequestBody SignupRequest userCredentials) {
         this.userService.registerUser(userCredentials);
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
 
-    @PostMapping("/signout")
+    @PostMapping("/auth/signout")
     public ResponseEntity<?> logoutUser() {
         ResponseCookie cookie = jwtUtils.generateEmptyCookie();
         return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, cookie.toString())
-                .body("You've been signed out!");
+                .body(new MessageResponse("You've been signed out!"));
     }
 }

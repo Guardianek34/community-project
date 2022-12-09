@@ -1,6 +1,6 @@
 package com.example.communitysystem.auth;
 
-import com.example.communitysystem.user.UserProfile;
+import com.example.communitysystem.community.Community;
 import lombok.*;
 
 import javax.persistence.*;
@@ -20,9 +20,7 @@ public class UserAuth {
     private String username;
     private String password;
     private String email;
-
-    @OneToOne(cascade = CascadeType.PERSIST)
-    private UserProfile profile;
+    private String userImageUrl;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -31,4 +29,12 @@ public class UserAuth {
             inverseJoinColumns = @JoinColumn(name = "user_role_id")
     )
     private Set<UserRole> roles;
+
+    @ManyToMany
+    @JoinTable(
+            name = "community_subscribers",
+            joinColumns = @JoinColumn(name = "community_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_auth_id")
+    )
+    private Set<Community> subscribedCommunities;
 }

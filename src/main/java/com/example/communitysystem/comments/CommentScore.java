@@ -1,6 +1,6 @@
 package com.example.communitysystem.comments;
 
-import com.example.communitysystem.user.UserProfile;
+import com.example.communitysystem.auth.UserAuth;
 
 import javax.persistence.*;
 
@@ -18,7 +18,7 @@ public class CommentScore {
     private Comment comment;
 
     @ManyToOne
-    private UserProfile user;
+    private UserAuth user;
 
     private Integer totalValue = ZERO;
 

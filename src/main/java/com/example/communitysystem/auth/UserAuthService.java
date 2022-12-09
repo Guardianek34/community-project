@@ -48,10 +48,6 @@ public class UserAuthService {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         UserDetailsSecurity userDetails = (UserDetailsSecurity) authentication.getPrincipal();
 
-        List<String> roles = userDetails.getAuthorities().stream()
-                .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.toList());
-
         return userDetails;
     }
 }
